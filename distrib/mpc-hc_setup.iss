@@ -29,6 +29,7 @@
 #endif
 
 ; If you want to compile the 64-bit version define "x64build" (uncomment the define below or use build.bat)
+;#define VS2012
 ;#define x64Build
 ;#define MPCHC_LITE
 
@@ -52,14 +53,19 @@
 #define app_version    str(MPC_VERSION_MAJOR) + "." + str(MPC_VERSION_MINOR) + "." + str(MPC_VERSION_PATCH) + "." + str(MPC_VERSION_REV)
 #define quick_launch   "{userappdata}\Microsoft\Internet Explorer\Quick Launch"
 
+#if defined(VS2012)
+  #define base_bindir = "..\bin12"
+#else
+  #define base_bindir = "..\bin"
+#endif
 
 #ifdef x64Build
-  #define bindir       = "..\bin\mpc-hc_x64"
+  #define bindir       = base_bindir + "\mpc-hc_x64"
   #define mpchc_exe    = "mpc-hc64.exe"
   #define mpchc_ini    = "mpc-hc64.ini"
   #define OutFilename  = app_name + "." + app_version + ".x64"
 #else
-  #define bindir       = "..\bin\mpc-hc_x86"
+  #define bindir       = base_bindir + "\mpc-hc_x86"
   #define mpchc_exe    = "mpc-hc.exe"
   #define mpchc_ini    = "mpc-hc.ini"
   #define OutFilename  = app_name + "." + app_version + ".x86"
@@ -69,6 +75,10 @@
   #define OutFilename  = OutFilename + ".Lite"
 #elif localize != "true"
   #define OutFilename  = OutFilename + ".en"
+#endif
+
+#if defined(VS2012)
+  #define OutFilename  = OutFilename + ".VS2012"
 #endif
 
 #ifnexist bindir + "\" + mpchc_exe
@@ -130,7 +140,11 @@ AllowNoIcons=yes
 ShowTasksTreeLines=yes
 DisableDirPage=auto
 DisableProgramGroupPage=auto
-MinVersion=5.01.2600sp3
+#if defined(VS2012)
+MinVersion=6.0
+#else
+MinVersion=5.1.2600sp3
+#endif
 AppMutex=MediaPlayerClassicW
 
 

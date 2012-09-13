@@ -1,4 +1,5 @@
 /bin
+/bin12
 /build.user.bat
 /distrib/*.exe
 /docs/astyle.exe
@@ -8,6 +9,7 @@
 /src/mpc-hc/mpcresources/newrc
 /src/mpc-hc/res/mpc-hc.exe.manifest
 /src/MPCTestAPI/bin
+/src/MPCTestAPI/bin12
 ipch
 *.a
 *.aps
